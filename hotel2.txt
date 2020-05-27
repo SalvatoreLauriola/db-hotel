@@ -1,0 +1,28 @@
+•	Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
+SELECT COUNT(`prenotazioni_has_ospiti`.`ospite_id`) AS `total-reservations`, `prenotazioni_has_ospiti`.`ospite_id`, `ospiti`.`name`,`ospiti`.`lastname` FROM `prenotazioni_has_ospiti` INNER JOIN `ospiti` ON `prenotazioni_has_ospiti`.`ospite_id` = `ospiti`.`id` GROUP BY `prenotazioni_has_ospiti`.`ospite_id` HAVING COUNT(`prenotazioni_has_ospiti`.`ospite_id`) > 2 
+
+•	Stampare tutti gli ospiti per ogni prenotazione
+SELECT (`prenotazioni_has_ospiti`.`ospite_id`), `ospiti`.`name`, `ospiti`.`lastname` FROM `prenotazioni_has_ospiti` INNER JOIN `ospiti` ON `prenotazioni_has_ospiti`.`ospite_id`=`ospiti`.`id` 
+
+•	Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018
+SELECT ospiti.name, ospiti.lastname, pagamenti.price, paganti.name as 'Nome_Pagante', prenotazioni.created_at as 'Data Prenotazione'
+FROM ospiti
+INNER JOIN paganti on ospiti.id = paganti.ospite_id
+INNER JOIN pagamenti on pagamenti.pagante_id = paganti.id
+INNER JOIN prenotazioni on prenotazioni.id = pagamenti.prenotazione_id
+WHERE YEAR(prenotazioni.created_at) = '2018' and MONTH(prenotazioni.created_at) = '05'
+
+•	Fai la somma di tutti i prezzi delle prenotazioni per le stanze del primo piano
+
+
+•	Le stanze sono state tutte prenotate almeno una volta? (Visualizzare le stanze non ancora prenotate)
+
+
+Bonus: Group by
+•	Conta gli ospiti raggruppandoli per anno di nascita
+
+
+•	Somma i prezzi dei pagamenti raggruppandoli per status
+
+
+•	Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
